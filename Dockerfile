@@ -33,7 +33,6 @@ RUN apt-get update && apt-get install -y \
  pygame \
  ttk
 
-
 # Install FFmpeg with mp3 support
 #RUN add-apt-repository -y ppa:mc3man/trusty-media \
 # && apt-get update -y \
