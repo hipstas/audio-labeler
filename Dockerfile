@@ -13,6 +13,9 @@ RUN apt-get -y upgrade
 # Install Python
 RUN apt-get install -y python-dev python-pip
 
+# Create app directory
+ADD . /webapp
+
 # Add requirements.txt
 ADD requirements.txt /webapp
 
@@ -20,9 +23,6 @@ ADD requirements.txt /webapp
 RUN pip install uwsgi
 # Install app requirements
 RUN pip install -r /webapp/requirements.txt
-
-# Create app directory
-ADD . /webapp
 
 # Set the default directory for our environment
 ENV HOME /webapp
