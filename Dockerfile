@@ -30,8 +30,7 @@ RUN apt-get update && apt-get install -y \
  pandas \
  matplotlib \
  pathlib \
- pygame \
- ttk
+ pygame
 
 # Install FFmpeg with mp3 support
 #RUN add-apt-repository -y ppa:mc3man/trusty-media \
