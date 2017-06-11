@@ -19,7 +19,7 @@ ADD requirements.txt /webapp
 # Install uwsgi Python web server
 RUN pip install uwsgi
 # Install app requirements
-RUN pip install -r requirements.txt
+RUN pip install -r /webapp/requirements.txt
 
 # Create app directory
 ADD . /webapp
