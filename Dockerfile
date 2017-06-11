@@ -1,42 +1,34 @@
 # Audio Labeling Container
 
-FROM ubuntu:14.04
-
 MAINTAINER Steve McLaughlin <stephen.mclaughlin@utexas.edu>
 
-EXPOSE 8080
 ENV PYTHONWARNINGS="ignore:a true SSLContext object"
+FROM ubuntu:14.04
 
-# Install dependencies
-RUN apt-get update && apt-get install -y \
- wget \
- git \
- software-properties-common \
- build-essential \
- zip \
- unzip \
- python2.7 \
- python-pip \
- python-dev \
- npm \
- && python -m pip install -U pip \
- && pip install -U \
- setuptools \
- pyOpenSSL \
- ndg-httpsclient \
- requests \
- unicodecsv \
- numpy \
- pandas \
- matplotlib \
- pathlib \
- pygame
+# Update OS
+RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list
+RUN apt-get update
+RUN apt-get -y upgrade
 
-# Install FFmpeg with mp3 support
-#RUN add-apt-repository -y ppa:mc3man/trusty-media \
-# && apt-get update -y \
-# && apt-get install -y ffmpeg gstreamer0.10-ffmpeg
+# Install Python
+RUN apt-get install -y python-dev python-pip
 
-# Configure container startup
-ENV SHELL /bin/bash
-WORKDIR /home/audio_labeling_shared
+# Add requirements.txt
+ADD requirements.txt /webapp
+
+# Install uwsgi Python web server
+RUN pip install uwsgi
+# Install app requirements
+RUN pip install -r requirements.txt
+
+# Create app directory
+ADD . /webapp
+
+# Set the default directory for our environment
+ENV HOME /webapp
+WORKDIR /webapp
+
+# Expose port 8000 for uwsgi
+EXPOSE 8000
+
+ENTRYPOINT ["uwsgi", "--http", "0.0.0.0:8000", "--module", "app:app", "--processes", "1", "--threads", "8"]
