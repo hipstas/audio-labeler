@@ -1,9 +1,9 @@
 # Audio Labeling Container
+FROM ubuntu:14.04
 
 MAINTAINER Steve McLaughlin <stephen.mclaughlin@utexas.edu>
 
 ENV PYTHONWARNINGS="ignore:a true SSLContext object"
-FROM ubuntu:14.04
 
 # Update OS
 RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list
