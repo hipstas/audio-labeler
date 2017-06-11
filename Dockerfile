@@ -17,9 +17,6 @@ RUN apt-get install -y python-dev python-pip
 ADD . /webapp
 
 # Add requirements.txt
-ADD app.py /webapp
-
-# Add requirements.txt
 ADD requirements.txt /webapp
 
 # Install uwsgi Python web server
@@ -34,4 +31,7 @@ WORKDIR /webapp
 # Expose port 8000 for uwsgi
 EXPOSE 8000
 
-ENTRYPOINT ["uwsgi", "--http", "0.0.0.0:8000", "--module", "app:app", "--processes", "1", "--threads", "8"]
+#CMD python app.py
+
+
+#ENTRYPOINT ["uwsgi", "--http", "0.0.0.0:8000", "--module", "app:app", "--processes", "1", "--threads", "8"]
