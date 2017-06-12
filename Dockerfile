@@ -13,11 +13,21 @@ python-dev \
 python-pip \
 wget \
 git \
+python-numpy-dev \
+python-numpy \
+python-yaml \
 && python -m pip install -U pip \
 && pip install -U \
 Flask \
 Jinja2 \
-unicodecsv
+unicodecsv \
+numpy \
+pygame
+
+# Install FFmpeg with mp3 support
+RUN add-apt-repository -y ppa:mc3man/trusty-media \
+ && apt-get update -y \
+ && apt-get install -y ffmpeg gstreamer0.10-ffmpeg
 
 WORKDIR /home/audio_labeler
 ENV SHELL /bin/bash
