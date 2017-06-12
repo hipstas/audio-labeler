@@ -9,6 +9,8 @@ ENV PYTHONWARNINGS="ignore:a true SSLContext object"
 
 # Update OS
 RUN apt-get update && apt-get install -y \
+software-properties-common \
+build-essential \
 python-dev \
 python-pip \
 wget \
