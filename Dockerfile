@@ -27,9 +27,10 @@ CMD cd /home/webapp/ \
 && mkdir static \
 && cd static \
 && wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/static/style.css \
-&& mkdir static/media \
 && mkdir ../templates \
-&& cd ../templates \
+&& mkdir static/media
+
+CMD cd ../templates \
 && wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/templates/form_action.html \
 && wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/templates/form_audio.html \
 && wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/templates/form_video.html
