@@ -32,6 +32,6 @@ CMD cd /home/audio_labeler/ \
 && cd /home/audio_labeler/templates \
 && wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/templates/form_action.html \
 && wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/templates/form_audio.html \
-&& wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/templates/form_video.html
-
-ENTRYPOINT python app.py
+&& wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/templates/form_video.html \
+&& cd /home/audio_labeler/ \
+&& python app.py
