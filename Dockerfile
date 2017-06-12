@@ -15,22 +15,22 @@ python-pip \
 git
 
 # Create app directory
-ADD . /webapp
+ADD . /home/webapp
 
 # Add requirements.txt
-COPY requirements.txt /webapp
+COPY requirements.txt /home/webapp
 
 # Install uwsgi Python web server
 #RUN pip install uwsgi
 
 # Install app requirements
-RUN pip install -r /webapp/requirements.txt
+RUN pip install -r /home/webapp/requirements.txt
 
 # Set the default directory for our environment
-ENV HOME /webapp
-WORKDIR /webapp
+ENV HOME /home/webapp
+WORKDIR /home/webapp
 
-ENTRYPOINT ["python", "/webapp/app.py"]
+ENTRYPOINT ["python", "/home/webapp/app.py"]
 
 EXPOSE 8000
 
