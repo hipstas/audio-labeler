@@ -26,12 +26,10 @@ COPY requirements.txt /home/webapp
 # Install app requirements
 RUN pip install -r /home/webapp/requirements.txt
 
+EXPOSE 8000
+
 # Set the default directory for our environment
 ENV HOME /home/webapp
 WORKDIR /home/webapp
 
 ENTRYPOINT ["python", "/home/webapp/app.py"]
-
-EXPOSE 8000
-
-#ENTRYPOINT ["uwsgi", "--http", "0.0.0.0:8000", "--module", "app:app", "--processes", "1", "--threads", "8"]
