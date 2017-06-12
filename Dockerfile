@@ -20,20 +20,18 @@ Jinja2 \
 unicodecsv
 
 WORKDIR /home/audio_labeler
+ENV SHELL /bin/bash
 
-RUN cd /home/audio_labeler/ \
+
+CMD cd /home/audio_labeler/ \
 && wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/app.py \
 && mkdir -p static/media \
 && mkdir templates \
 && cd static \
-&& wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/static/style.css
-
-RUN cd /home/audio_labeler/templates \
+&& wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/static/style.css \
+&& cd /home/audio_labeler/templates \
 && wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/templates/form_action.html \
 && wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/templates/form_audio.html \
 && wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/templates/form_video.html
 
-
-ENV SHELL /bin/bash
-
-CMD python app.py
+ENTRYPOINT python app.py
