@@ -30,7 +30,10 @@ RUN pip install -r /webapp/requirements.txt
 ENV HOME /webapp
 WORKDIR /webapp
 
-CMD git clone https://github.com/stevemclaugh/audio-labeling-container.git
+ENTRYPOINT ["python"]
+CMD ["app.py"]
+
+#CMD git clone https://github.com/stevemclaugh/audio-labeling-container.git
 #CMD python audio-labeling-container/app.py
 
 
