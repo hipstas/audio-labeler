@@ -19,6 +19,8 @@ Flask \
 Jinja2 \
 unicodecsv
 
+WORKDIR /home/audio_labeler
+
 RUN cd /home/audio_labeler/ \
 && wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/app.py \
 && mkdir static \
@@ -33,10 +35,6 @@ RUN cd /home/audio_labeler/templates \
 && wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/templates/form_video.html
 
 
-
-# Set the default directory for our environment
 ENV SHELL /bin/bash
-WORKDIR /home/audio_labeler
-
 
 CMD python app.py
