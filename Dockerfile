@@ -3,6 +3,7 @@ FROM ubuntu:14.04
 
 MAINTAINER Steve McLaughlin <stephen.mclaughlin@utexas.edu>
 
+EXPOSE 8000
 ENV PYTHONWARNINGS="ignore:a true SSLContext object"
 
 # Update OS
@@ -12,22 +13,23 @@ RUN apt-get update \
 && apt-get install -y \
 python-dev \
 python-pip \
-git
-
-
-# Add requirements.txt
-COPY requirements.txt /webapp
-
-# Install app requirements
-RUN pip install -r /webapp/requirements.txt
-
-EXPOSE 8000
-
-# Create app directory
-ADD . /webapp
+git \
+&& python -m pip install -U pip \
+&& pip install -U \
+Flask \
+Jinja2
 
 # Set the default directory for our environment
-ENV HOME /webapp
+ENV SHELL /bin/bash
 WORKDIR /webapp
 
-#ENTRYPOINT ["python", "/webapp/app.py"]
+CMD cd /webapp/ \
+&& wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/app.py \
+&& mkdir static \
+&& cd static \
+&& wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/static/style.css \
+&& mkdir ../templates \
+&& cd ../templates \
+&& wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/templates/form_action.html \
+&& wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/templates/form_audio.html \
+&& wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/templates/form_video.html
