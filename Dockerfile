@@ -21,7 +21,7 @@ ADD . /webapp
 COPY requirements.txt /webapp
 
 # Install uwsgi Python web server
-RUN pip install uwsgi
+#RUN pip install uwsgi
 
 # Install app requirements
 RUN pip install -r /webapp/requirements.txt
@@ -30,11 +30,9 @@ RUN pip install -r /webapp/requirements.txt
 ENV HOME /webapp
 WORKDIR /webapp
 
-ENTRYPOINT ["python"]
-CMD ["app.py"]
+ENTRYPOINT ["python", "/webapp/app.py"]
 
 #CMD git clone https://github.com/stevemclaugh/audio-labeling-container.git
 #CMD python audio-labeling-container/app.py
-
 
 #ENTRYPOINT ["uwsgi", "--http", "0.0.0.0:8000", "--module", "app:app", "--processes", "1", "--threads", "8"]
