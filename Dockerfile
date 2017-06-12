@@ -16,12 +16,15 @@ git \
 python-numpy-dev \
 python-numpy \
 python-yaml \
+python-pygame \
 && python -m pip install -U pip \
 && pip install -U \
+setuptools \
 Flask \
 Jinja2 \
 unicodecsv \
 numpy \
+pandas \
 pygame
 
 # Install FFmpeg with mp3 support
