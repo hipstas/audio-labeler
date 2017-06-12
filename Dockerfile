@@ -4,6 +4,8 @@ FROM ubuntu:14.04
 MAINTAINER Steve McLaughlin <stephen.mclaughlin@utexas.edu>
 
 EXPOSE 8000
+EXPOSE 8484
+
 ENV PYTHONWARNINGS="ignore:a true SSLContext object"
 
 # Update OS
