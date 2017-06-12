@@ -35,4 +35,6 @@ ENTRYPOINT ["python", "/webapp/app.py"]
 #CMD git clone https://github.com/stevemclaugh/audio-labeling-container.git
 #CMD python audio-labeling-container/app.py
 
+EXPOSE 8000
+
 #ENTRYPOINT ["uwsgi", "--http", "0.0.0.0:8000", "--module", "app:app", "--processes", "1", "--threads", "8"]
