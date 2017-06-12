@@ -13,6 +13,7 @@ RUN apt-get update \
 && apt-get install -y \
 python-dev \
 python-pip \
+wget \
 git \
 && python -m pip install -U pip \
 && pip install -U \
