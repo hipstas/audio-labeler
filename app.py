@@ -7,12 +7,13 @@ import random
 import os
 import thread
 
-#def start_server():
-#	os.chdir('static/media')
-#	os.system('python -m SimpleHTTPServer 8484')
+def start_server():
+	os.chdir('static/media')
+	os.system('python -m SimpleHTTPServer 8484')
 
-#thread.start_new_thread(start_server, ())
+thread.start_new_thread(start_server, ())
 
+os.chdir('/home/audio_labeler/')
 
 # Initialize the Flask application
 app = Flask(__name__)

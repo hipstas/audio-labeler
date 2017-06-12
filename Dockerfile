@@ -20,9 +20,9 @@ unicodecsv
 
 # Set the default directory for our environment
 ENV SHELL /bin/bash
-WORKDIR /home/webapp
+WORKDIR /home/audio_labeler
 
-CMD cd /home/webapp/ \
+CMD cd /home/audio_labeler/ \
 && wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/app.py \
 && mkdir static \
 && cd static \
