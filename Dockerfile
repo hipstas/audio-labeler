@@ -23,11 +23,10 @@ WORKDIR /home/audio_labeler
 
 RUN cd /home/audio_labeler/ \
 && wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/app.py \
-&& mkdir static \
+&& mkdir -p static/media \
+&& mkdir templates \
 && cd static \
-&& wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/static/style.css \
-&& mkdir ../templates \
-&& mkdir static/media
+&& wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/static/style.css
 
 RUN cd /home/audio_labeler/templates \
 && wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/templates/form_action.html \
