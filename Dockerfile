@@ -16,18 +16,18 @@ git
 
 
 # Add requirements.txt
-COPY requirements.txt /home/webapp
+COPY requirements.txt /webapp
 
 # Install app requirements
-RUN pip install -r /home/webapp/requirements.txt
+RUN pip install -r /webapp/requirements.txt
 
 EXPOSE 8000
 
 # Create app directory
-ADD . /home/webapp
+ADD . /webapp
 
 # Set the default directory for our environment
-ENV HOME /home/webapp
-WORKDIR /home/webapp
+ENV HOME /webapp
+WORKDIR /webapp
 
-#ENTRYPOINT ["python", "/home/webapp/app.py"]
+#ENTRYPOINT ["python", "/webapp/app.py"]
