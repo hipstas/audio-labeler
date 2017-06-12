@@ -3,8 +3,7 @@ FROM ubuntu:14.04
 
 MAINTAINER Steve McLaughlin <stephen.mclaughlin@utexas.edu>
 
-EXPOSE 8000
-EXPOSE 8484
+EXPOSE 8000 8484
 
 ENV PYTHONWARNINGS="ignore:a true SSLContext object"
 
@@ -20,11 +19,7 @@ Flask \
 Jinja2 \
 unicodecsv
 
-# Set the default directory for our environment
-ENV SHELL /bin/bash
-WORKDIR /home/audio_labeler
-
-CMD cd /home/audio_labeler/ \
+RUN cd /home/audio_labeler/ \
 && wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/app.py \
 && mkdir static \
 && cd static \
@@ -32,9 +27,16 @@ CMD cd /home/audio_labeler/ \
 && mkdir ../templates \
 && mkdir static/media
 
-CMD cd ../templates \
+RUN cd /home/audio_labeler/templates \
 && wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/templates/form_action.html \
 && wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/templates/form_audio.html \
 && wget https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/templates/form_video.html
+
+
+
+# Set the default directory for our environment
+ENV SHELL /bin/bash
+WORKDIR /home/audio_labeler
+
 
 CMD python app.py
