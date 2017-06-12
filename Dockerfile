@@ -31,7 +31,7 @@ ENV HOME /webapp
 WORKDIR /webapp
 
 CMD git clone https://github.com/stevemclaugh/audio-labeling-container.git
-CMD python audio-labeling-container/app.py
+#CMD python audio-labeling-container/app.py
 
 
 #ENTRYPOINT ["uwsgi", "--http", "0.0.0.0:8000", "--module", "app:app", "--processes", "1", "--threads", "8"]

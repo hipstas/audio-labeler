@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Handle POST requests with Flask</title>
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <div id="container">
+            <div class="title">
+                <h1>POST request with Flask</h1>
+            </div>
+            <div id="content">
+                <h3>{{ mediapath }}</h3>
+                <video width="620" controls autoplay preload="auto">
+                    <source src="{{ mediapath }}" />
+                </video>
+
+
+                <form method="post" action="{{ url_for('submit') }}">
+                  <label for="classname">Please enter class:</label>
+                    <input type="text" size="90" name="classname" /><br />
+                  <label for="mediapath">Media path:</label>
+                    <input type="text" size="90" value="{{ mediapath }}" name="mediapath" /><br />
+                  <input type="submit" />
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
