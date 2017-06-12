@@ -8,7 +8,7 @@ import os
 import thread
 
 def start_server():
-	os.chdir('static/media')
+	os.chdir('/home/audio_labeler/static/media')
 	os.system('python -m SimpleHTTPServer 8484')
 
 thread.start_new_thread(start_server, ())
@@ -21,7 +21,7 @@ app = Flask(__name__)
 # Define a route for the default URL, which loads the form
 @app.route('/')
 def form():
-    mediapath='static/media/'+random.choice([item for item in os.listdir('static/media') if item[-4:].lower() in ('.mp3','.wav','.mp4')])
+    mediapath='/home/audio_labeler/static/media/'+random.choice([item for item in os.listdir('/home/audio_labeler/static/media') if item[-4:].lower() in ('.mp3','.wav','.mp4')])
     if mediapath[-4:].lower()=='.mp4':
         return render_template('form_video.html',mediapath=mediapath)
     else:
@@ -39,7 +39,7 @@ def submit():
         fo.write(name+',')
         fo.write(mediapath+'\n')
 
-    mediapath='static/media/'+random.choice([item for item in os.listdir('static/media') if item[-4:].lower() in ('.mp3','.wav','.mp4')])
+    mediapath='/home/audio_labeler/static/media/'+random.choice([item for item in os.listdir('/home/audio_labeler/static/media') if item[-4:].lower() in ('.mp3','.wav','.mp4')])
 
     return render_template('form_action.html', mediapath=mediapath)
 
