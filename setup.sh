@@ -27,4 +27,4 @@ wget -N https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/
 wget -N https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/static/wavesurfer/wavesurfer.timeline.min.js
 
 cd /home/audio_labeler/
-#python app.py
+python app.py
