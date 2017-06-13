@@ -8,8 +8,7 @@ EXPOSE 8000 8484
 ENV SHELL /bin/bash
 ENV PYTHONWARNINGS="ignore:a true SSLContext object"
 
-RUN mkdir -p /home/audio_labeler/
-COPY ./setup.sh /home/audio_labeler/
+COPY ./setup.sh /home/
 
 # Update OS
 RUN apt-get update && apt-get install -y \
@@ -39,6 +38,4 @@ RUN add-apt-repository -y ppa:mc3man/trusty-media \
  && apt-get update -y \
  && apt-get install -y ffmpeg gstreamer0.10-ffmpeg
 
-WORKDIR /home/audio_labeler
-
-ENTRYPOINT ["/home/audio_labeler/setup.sh"]
+ENTRYPOINT ["bash","/home/setup.sh"]
