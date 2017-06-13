@@ -17,7 +17,7 @@
                 var wavesurfer = Object.create(WaveSurfer);
                 var starttime = 0;
                 var endtime = 1;
-                var audio_filename = '{{ audio_filename }}';
+                var audio_file_id = '{{ audio_file_id }}';
 
                 wavesurfer.on('ready', function () {
                     wavesurfer.addRegion({
@@ -43,7 +43,7 @@
                     });
 
                     // Load audio from URL
-                    wavesurfer.load('http://localhost:8484/'+audio_filename);
+                    wavesurfer.load('http://localhost:8484/temp.wav');
 
                                 document.querySelector(
                                         '[data-action="play"]'
@@ -87,7 +87,9 @@
             <br />
                 <form method="post" action="{{ url_for('form') }}">
 
-                    <input type="text" size="86" value="{{ audio_filename }}" name="audio_filename" /><br /><br />
+                    <input type="text" size="86" value="{{ audio_file_id }}" name="audio_file_id" /><br /><br />
+
+                    <input type="text" size="86" value="{{ start_time }}" name="start_time" /><br /><br />
 
                     <label for="classname">Label:</label>
                     <input type="text" size="80" value="{{ classname }}" name="classname" /><br /><br />
@@ -96,6 +98,8 @@
                   <input type="submit" name="button" value="Background Speaker" />
                   <input type="submit" name="button" value="Music" />
                   <input type="submit" name="button" value="Silence" />
+                  <input type="submit" name="button" value="Multiple Speakers" />
+                  <input type="submit" name="button" value="Not Sure" />
 
 
                 </form>
