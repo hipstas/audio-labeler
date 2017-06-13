@@ -6,42 +6,91 @@ import unicodecsv
 import random
 import os
 import thread
+import subprocess
+import glob
+import fnmatch
+from pydub import AudioSegment
+import timeit
 
+os.chdir('/home/audio_labeler/')
+
+
+## Returns duration of any media file using ffprobe
+def media_duration(media_path):
+	return float(subprocess.check_output(['ffprobe', '-v', 'quiet', '-of', 'csv=p=0', '-show_entries', 'format=duration', media_path]).strip())
+
+## Creating a list of file IDs in the "clips" directory
+complete_clip_ids = list(set([item.split('____')[0] for item in os.listdir('clips') if '____' in item]))
+
+
+## Creating a list of every media file in the "media" directory
+
+media_paths=[]
+
+for root, dirnames, filenames in os.walk('media'):
+	for filename in fnmatch.filter(filenames, '*'):
+		media_paths.append(os.path.join(root, filename))
+
+media_paths = [item for item in media_paths if item.lower()[-4:] in ('.mp3','.mp4','.wav')]
+
+for pathname in media_paths:
+	tic=timeit.default_timer()
+	clip_id = pathname.split('/')[-1][:-4]
+	if clip_id not in complete_clip_ids:
+		print("\n*** starting "+clip_id+" ***")
+		pydub_audio = AudioSegment.from_file(pathname, pathname[-3:])
+		pydub_audio.set_channels(1)
+		clip_numbers = int(media_duration(pathname)) - 6
+		for i in range(clip_numbers):
+			out_filename = clip_id + "____" + str(i) + '.mp3'
+			pydub_clip = pydub_audio[i*1000:(i+4)*1000]
+			pydub_clip.export('clips/'+out_filename, format="mp3",bitrate="128k")
+			print('  '+str(timeit.default_timer() - tic)+" seconds on this file so far")
+		print("completed in "+str(timeit.default_timer() - tic)+" seconds")
+
+
+## Starting server in "clips" directory
 def start_server():
-	os.chdir('/home/audio_labeler/static/media')
+	os.chdir('/home/audio_labeler/clips')
 	os.system('python -m SimpleHTTPServer 8484')
 
 thread.start_new_thread(start_server, ())
 
 os.chdir('/home/audio_labeler/')
 
+
+
 # Initialize the Flask application
 app = Flask(__name__)
 
+
 # Define a route for the default URL, which loads the form
-@app.route('/')
+@app.route('/',methods=['POST','GET'])
 def form():
-    mediapath='/home/audio_labeler/static/media/'+random.choice([item for item in os.listdir('/home/audio_labeler/static/media') if item[-4:].lower() in ('.mp3','.wav','.mp4')])
-    if mediapath[-4:].lower()=='.mp4':
-        return render_template('form_video.html',mediapath=mediapath)
-    else:
-        return render_template('form_audio.html',mediapath=mediapath)
+	## Dealing with form data from the last round, if applicable
+	try:
+		classname=request.form['classname']
+		if request.form['button'] == 'Apply Label':
+			write_classname = classname
+		else:
+			write_classname = request.form['button']
+		audio_file_id=request.form['audio_filename'].split('____')[0]
+		start_time=request.form['audio_filename'].split('____')[1][:-4]
+		with open('/home/audio_labeler/output_table.csv','a') as fo:
+			duration = 1
+			fo.write(audio_file_id+',')
+			fo.write(str(float(start_time))+',')
+			fo.write(str(float(duration))+',')
+			fo.write('''"''' + write_classname + '''"\n''')
+	except:
+		classname=''
 
-# Define a route for the action of the form, for example '/submit/'
-# We are also defining which type of requests this route is
-# accepting: POST requests in this case
-@app.route('/submit/', methods=['POST'])
-def submit():
-    name=request.form['classname']
-    mediapath=request.form['mediapath']
+	## Launching new round
+	audio_filename=random.choice([item for item in os.listdir('/home/audio_labeler/clips') if item[-4:].lower() in ('.mp3','.wav','.mp4')])
+	return render_template('form_audio.html', audio_filename=audio_filename, classname=classname)
 
-    with open(mediapath[:-4]+'.csv','a') as fo:
-        fo.write(name+',')
-        fo.write(mediapath+'\n')
 
-    mediapath='/home/audio_labeler/static/media/'+random.choice([item for item in os.listdir('/home/audio_labeler/static/media') if item[-4:].lower() in ('.mp3','.wav','.mp4')])
 
-    return render_template('form_action.html', mediapath=mediapath)
 
 # Run the app :)
 if __name__ == '__main__':

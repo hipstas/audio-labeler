@@ -1,26 +1,103 @@
 <html>
     <head>
-        <title>Handle POST requests with Flask</title>
         <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='wavesurfer/ribbon.css') }}" />
+        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+        <title>Audio Labeler</title>
+
+                <!-- wavesurfer.js -->
+                <script src="{{ url_for('static', filename='wavesurfer/wavesurfer.min.js') }}"></script>
+                <script src="{{ url_for('static', filename='wavesurfer/wavesurfer.regions.min.js') }}"></script>
+                <script src="{{ url_for('static', filename='wavesurfer/wavesurfer.regions.js') }}"></script>
+                <script src="{{ url_for('static', filename='wavesurfer/wavesurfer.timeline.min.js') }}"></script>
+                <script src="{{ url_for('static', filename='wavesurfer/wavesurfer.minimap.min.js') }}"></script>
+
+                <script>
+                var wavesurfer = Object.create(WaveSurfer);
+                var starttime = 0;
+                var endtime = 1;
+                var audio_filename = '{{ audio_filename }}';
+
+                wavesurfer.on('ready', function () {
+                    wavesurfer.addRegion({
+                        start: starttime,
+                        end: endtime,
+                        color: 'hsla(400, 100%, 30%, 0.1)',
+                        drag: false
+                    });
+                    wavesurfer.play(starttime,endtime)
+
+                });
+
+
+                // Init & load audio file
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Init
+                    wavesurfer.init({
+                        container: document.querySelector('#waveform'),
+                        waveColor: '#A8DBA8',
+                        progressColor: '#3B8686',
+                        backend: 'MediaElement',
+
+                    });
+
+                    // Load audio from URL
+                    wavesurfer.load('http://localhost:8484/'+audio_filename);
+
+                                document.querySelector(
+                                        '[data-action="play"]'
+                                    ).addEventListener('click', wavesurfer.playPause.bind(wavesurfer));
+                                document.querySelector(
+                                        '[data-action="repeat"]'
+                                    ).addEventListener('click', wavesurfer.play.bind(wavesurfer,starttime,endtime));
+
+                                });
+                </script>
+
     </head>
     <body>
         <div id="container">
             <div class="title">
-                <h1>POST request with Flask</h1>
-            </div>
+            <br />
+            <br />
+            <h1>Audio Labeler</h1>
+            <br />
+            <br />
+        </div>
             <div id="content">
-                <h3>{{ mediapath }}</h3>
-                <audio width="620" controls autoplay preload="auto">
-                    <source src="{{ mediapath }}" />
-                </audio>
+
+                <div class="container">
+                <div id="waveform">
+                    <!-- Here be the waveform -->
+                </div>
+
+                <div class="controls">
+                    <button class="btn btn-primary" data-action="play">
+                        <i class="glyphicon glyphicon-play"></i>
+                        Play
+                        /
+                        <i class="glyphicon glyphicon-pause"></i>
+                        Pause
+                    </button>
+                    <button class="btn btn-repeat" data-action="repeat">
+                        Repeat
+                    </button>
+            </div>
+            <br />
+                <form method="post" action="{{ url_for('form') }}">
+
+                    <input type="text" size="86" value="{{ audio_filename }}" name="audio_filename" /><br /><br />
+
+                    <label for="classname">Label:</label>
+                    <input type="text" size="80" value="{{ classname }}" name="classname" /><br /><br />
+
+                  <input type="submit" name="button" value="Apply Label" /><br /><br />
+                  <input type="submit" name="button" value="Background Speaker" />
+                  <input type="submit" name="button" value="Music" />
+                  <input type="submit" name="button" value="Silence" />
 
 
-                <form method="post" action="{{ url_for('submit') }}">
-                  <label for="classname">Please enter class:</label>
-                    <input type="text" size="90" name="classname" /><br />
-                  <label for="mediapath">Media path:</label>
-                    <input type="text" size="90" value="{{ mediapath }}" name="mediapath" /><br />
-                  <input type="submit" />
                 </form>
             </div>
         </div>

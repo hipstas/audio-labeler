@@ -27,7 +27,7 @@ Jinja2 \
 unicodecsv \
 numpy \
 pandas \
-pygame
+pydub
 
 # Install FFmpeg with mp3 support
 RUN add-apt-repository -y ppa:mc3man/trusty-media \

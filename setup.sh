@@ -1,7 +1,10 @@
 cd /home/audio_labeler/
 wget -N https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/app.py
-mkdir -p static/media
-mkdir templates
+
+mkdir -p media
+mkdir -p templates
+mkdir -p static
+
 cd static
 wget -N https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/static/style.css
 cd /home/audio_labeler/templates
