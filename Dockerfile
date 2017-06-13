@@ -9,6 +9,7 @@ ENV SHELL /bin/bash
 ENV PYTHONWARNINGS="ignore:a true SSLContext object"
 
 COPY ./setup.sh /home/
+RUN mkdir -p /home/audio_labeler/
 
 # Update OS
 RUN apt-get update && apt-get install -y \
