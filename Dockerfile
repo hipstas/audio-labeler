@@ -39,4 +39,4 @@ ENV SHELL /bin/bash
 
 ADD setup.sh /home/audio_labeler/
 
-ENTRYPOINT bash /home/audio_labeler/setup.sh
+#ENTRYPOINT bash /home/audio_labeler/setup.sh
