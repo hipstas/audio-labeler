@@ -85,11 +85,13 @@
                     </button>
             </div>
             <br />
+            <h3>{{ audio_file_id }}, {{ start_time }} seconds</a>
+
                 <form method="post" action="{{ url_for('form') }}">
 
-                    <input type="text" size="86" value="{{ audio_file_id }}" name="audio_file_id" /><br /><br />
+                    <input type="hidden" value="{{ audio_file_id }}" name="audio_file_id" /><br /><br />
 
-                    <input type="text" size="86" value="{{ start_time }}" name="start_time" /><br /><br />
+                    <input type="hidden" value="{{ start_time }}" name="start_time" /><br /><br />
 
                     <label for="classname">Label:</label>
                     <input type="text" size="80" value="{{ classname }}" name="classname" /><br /><br />
