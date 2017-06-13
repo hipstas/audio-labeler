@@ -7,6 +7,8 @@ EXPOSE 8000 8484
 
 ENV SHELL /bin/bash
 ENV PYTHONWARNINGS="ignore:a true SSLContext object"
+
+RUN mkdir -p /home/audio_labeler/
 COPY ./setup.sh /home/audio_labeler/
 
 # Update OS
