@@ -27,6 +27,7 @@ Jinja2 \
 unicodecsv \
 numpy \
 pandas \
+moviepy \
 pydub
 
 # Install FFmpeg with mp3 support
@@ -39,4 +40,4 @@ ENV SHELL /bin/bash
 
 ADD setup.sh /home/audio_labeler/
 
-#ENTRYPOINT bash /home/audio_labeler/setup.sh
+ENTRYPOINT bash /home/audio_labeler/setup.sh
