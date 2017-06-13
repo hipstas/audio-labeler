@@ -1,2 +1,4 @@
-/home/audio_labeler/static/media/*
+media/*
+clips/*
 test/*
+.DS_Store
