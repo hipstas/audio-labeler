@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cd /home/audio_labeler/
 wget -N https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/app.py
 

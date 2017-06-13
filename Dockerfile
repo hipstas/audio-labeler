@@ -5,7 +5,9 @@ MAINTAINER Steve McLaughlin <stephen.mclaughlin@utexas.edu>
 
 EXPOSE 8000 8484
 
+ENV SHELL /bin/bash
 ENV PYTHONWARNINGS="ignore:a true SSLContext object"
+COPY ./setup.sh /home/audio_labeler/
 
 # Update OS
 RUN apt-get update && apt-get install -y \
@@ -27,9 +29,8 @@ Jinja2 \
 unicodecsv \
 numpy \
 pandas \
-moviepy
-
-#pydub
+moviepy \
+pydub
 
 # Install FFmpeg with mp3 support
 RUN add-apt-repository -y ppa:mc3man/trusty-media \
@@ -37,8 +38,5 @@ RUN add-apt-repository -y ppa:mc3man/trusty-media \
  && apt-get install -y ffmpeg gstreamer0.10-ffmpeg
 
 WORKDIR /home/audio_labeler
-ENV SHELL /bin/bash
 
-ADD setup.sh /home/audio_labeler/
-
-ENTRYPOINT bash /home/audio_labeler/setup.sh
+ENTRYPOINT ["/home/audio_labeler/setup.sh"]
