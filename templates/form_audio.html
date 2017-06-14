@@ -90,16 +90,18 @@
                         Repeat
                     </button>
             </div>
-            <br />
+            
+            <br /><br />
+
             <h3>{{ audio_file_id }}, {{ start_time }} seconds</a>
 
                 <form method="post" action="{{ url_for('form') }}">
 
-                    <input type="hidden" value="{{ audio_file_id }}" name="audio_file_id" /><br /><br />
+                    <input type="hidden" value="{{ audio_file_id }}" name="audio_file_id" />
 
-                    <input type="hidden" value="{{ start_time }}" name="start_time" /><br /><br />
+                    <input type="hidden" value="{{ start_time }}" name="start_time" />
 
-                    <input type="hidden" value="{{ temp_wav_filename }}" name="temp_wav_filename" /><br /><br />
+                    <input type="hidden" value="{{ temp_wav_filename }}" name="temp_wav_filename" />
 
                     <label for="classname">Label:</label>
                     <input type="text" size="72" value="{{ classname }}" name="classname" /><br /><br />
