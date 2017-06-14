@@ -59,6 +59,11 @@ def form():
     except:
         classname=''
 
+    try:
+        os.remove('/home/audio_labeler/static/'+temp_wav_filename)
+    except:
+        pass
+
     ## Launching new round
     #audio_filename=random.choice([item for item in os.listdir('/home/audio_labeler/clips') if item[-4:].lower() in ('.mp3','.wav','.mp4')])
     media_path = random.choice(media_paths)
@@ -66,10 +71,9 @@ def form():
     duration = media_duration(media_path)
     start_time = int((random.random()*duration))-5
     snd = AudioFileClip.AudioFileClip(media_path)
-    snd.subclip(start_time,start_time+5).write_audiofile('/home/audio_labeler/static/temp.wav')
-    response = render_template('form_audio.html', audio_file_id=audio_file_id, start_time=start_time, classname=classname)
-    response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
-    response.headers['Cache-Control'] = 'public, max-age=0'
+    temp_wav_filename = str(random.random())[2:]+'.wav'
+    snd.subclip(start_time,start_time+5).write_audiofile('/home/audio_labeler/static/'+temp_wav_filename)
+    response = render_template('form_audio.html', audio_file_id=audio_file_id, start_time=start_time, classname=classname, temp_wav_filename=temp_wav_filename)
     return response
 
 
