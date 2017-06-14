@@ -60,7 +60,7 @@ def form():
         classname=''
 
     try:
-        os.remove('/home/audio_labeler/static/'+temp_wav_filename)
+        os.remove('/home/audio_labeler/static/'+request.form['temp_wav_filename'])
     except:
         pass
 
