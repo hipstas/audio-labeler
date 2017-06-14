@@ -39,4 +39,5 @@ RUN add-apt-repository -y ppa:mc3man/trusty-media \
  && apt-get update -y \
  && apt-get install -y ffmpeg gstreamer0.10-ffmpeg
 
+WORKDIR /home/audio_labeler/
 ENTRYPOINT ["bash","/home/setup.sh"]
