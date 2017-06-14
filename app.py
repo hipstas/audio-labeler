@@ -68,9 +68,10 @@ def form():
 	snd = AudioFileClip.AudioFileClip(media_path)
 	snd.subclip(start_time,start_time+5).write_audiofile('/home/audio_labeler/static/temp.wav')
 
-	return render_template('form_audio.html', audio_file_id=audio_file_id, start_time=start_time, classname=classname)
-
-
+	response = render_template('form_audio.html', audio_file_id=audio_file_id, start_time=start_time, classname=classname)
+    response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+    response.headers['Cache-Control'] = 'public, max-age=0'
+    return response
 
 
 
