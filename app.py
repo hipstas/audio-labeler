@@ -36,7 +36,7 @@ media_paths = [item for item in media_paths if item.lower()[-4:] in ('.mp3','.mp
 
 # Initialize the Flask application
 app = Flask(__name__)
-
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 # Define a route for the default URL, which loads the form
 @app.route('/',methods=['POST','GET'])
