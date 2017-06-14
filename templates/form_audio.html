@@ -43,7 +43,7 @@
                     });
 
                     // Load audio from URL
-                    wavesurfer.load('{{ url_for('static', filename='temp.wav') }}');
+                    wavesurfer.load('{{ url_for('static', filename=temp_wav_filename) }}');
 
                                 document.querySelector(
                                         '[data-action="play"]'
