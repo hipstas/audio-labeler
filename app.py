@@ -72,7 +72,7 @@ def form():
 	#audio_filename=random.choice([item for item in os.listdir('/home/audio_labeler/clips') if item[-4:].lower() in ('.mp3','.wav','.mp4')])
 	media_path = random.choice(media_paths)
 	audio_file_id = media_path.split('/')[-1][:-4]
-	duration = media_duration(media_path)
+	duration = media_duration('/home/audio_labeler/+media_path)
 	start_time = int((random.random()*duration))-5
 	snd = AudioFileClip.AudioFileClip(media_path)
 	snd.subclip(start_time,start_time+5).write_audiofile('/var/tmp/temp.wav')
