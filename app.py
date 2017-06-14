@@ -34,15 +34,6 @@ for root, dirnames, filenames in os.walk('/home/audio_labeler/media'):
 
 media_paths = [item for item in media_paths if item.lower()[-4:] in ('.mp3','.mp4','.wav')]
 
-## Starting server in "clips" directory
-def start_server():
-	os.chdir('/var/tmp')
-	os.system('python -m SimpleHTTPServer 8484')
-
-thread.start_new_thread(start_server, ())
-
-os.chdir('/home/audio_labeler/')
-
 # Initialize the Flask application
 app = Flask(__name__)
 
@@ -75,7 +66,7 @@ def form():
 	duration = media_duration(media_path)
 	start_time = int((random.random()*duration))-5
 	snd = AudioFileClip.AudioFileClip(media_path)
-	snd.subclip(start_time,start_time+5).write_audiofile('/var/tmp/temp.wav')
+	snd.subclip(start_time,start_time+5).write_audiofile('/home/audio_labeler/static/temp.wav')
 
 	return render_template('form_audio.html', audio_file_id=audio_file_id, start_time=start_time, classname=classname)
 

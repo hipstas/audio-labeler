@@ -43,7 +43,7 @@
                     });
 
                     // Load audio from URL
-                    wavesurfer.load('http://localhost:8484/temp.wav');
+                    wavesurfer.load('{{ url_for('static', filename='temp.wav') }}');
 
                                 document.querySelector(
                                         '[data-action="play"]'
@@ -53,6 +53,12 @@
                                     ).addEventListener('click', wavesurfer.play.bind(wavesurfer,starttime,endtime));
 
                                 });
+
+                window.onload = function() {
+                     document.getElementById("apply_button").focus();
+                };
+
+
                 </script>
 
     </head>
@@ -96,7 +102,7 @@
                     <label for="classname">Label:</label>
                     <input type="text" size="72" value="{{ classname }}" name="classname" /><br /><br />
 
-                  <input type="submit" name="button" value="Apply Label" /><br /><br />
+                  <input type="submit" name="button" id="apply_button" value="Apply Label" /><br /><br />
                   <input type="submit" name="button" value="Background Speaker" />
                   <input type="submit" name="button" value="Music" />
                   <input type="submit" name="button" value="Silence" />
