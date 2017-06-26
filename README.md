@@ -1,4 +1,4 @@
-# Audio Labeling Container
+# Audio Labeler
 
 First, install [Docker CE](https://www.docker.com/community-edition) and/or [Docker Toolbox](https://www.docker.com/products/docker-toolbox).
 
