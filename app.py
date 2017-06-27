@@ -73,7 +73,7 @@ def form():
     snd = AudioFileClip.AudioFileClip(media_path)
     temp_wav_filename = str(random.random())[2:]+'.wav'
     snd.subclip(start_time,start_time+5).write_audiofile('/home/audio_labeler/static/'+temp_wav_filename)
-    response = render_template('form_audio.html', audio_file_id=audio_file_id, start_time=start_time, classname=classname, temp_wav_filename=temp_wav_filename)
+    response = render_template('form_audio.html', audio_file_id=audio_file_id, start_time=start_time, classname=classname, temp_wav_filename=temp_wav_filename, media_path=media_path)
     return response
 
 

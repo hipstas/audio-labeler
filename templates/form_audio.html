@@ -90,10 +90,14 @@
                         Repeat
                     </button>
             </div>
-            
+
             <br /><br />
 
-            <h3>{{ audio_file_id }}, {{ start_time }} seconds</a>
+            <h3> {{ media_path }} </h3>
+
+            <h3>    {{ start_time }} seconds</h3>
+
+            <br />
 
                 <form method="post" action="{{ url_for('form') }}">
 
