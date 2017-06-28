@@ -49,13 +49,9 @@ def form():
     try:
         classname=request.form['classname']
 
-        try:
-            label_count_dict[classname] += 1
-        except:
-            label_count_dict[classname] = 1
-
         if request.form['button'] == 'Apply Label':
             write_classname = classname
+
         else:
             write_classname = request.form['button']
         audio_file_id=request.form['audio_file_id']
@@ -73,6 +69,15 @@ def form():
         os.remove('/home/audio_labeler/static/'+request.form['temp_wav_filename'])
     except:
         pass
+
+    default_buttons=["Background Speaker","Music","Silence","Multiple Speakers","Not Sure", "Noise"]
+
+    try:
+        if write_classname not in default_buttons:
+            label_count_dict[write_classname] += 1
+    except:
+        if write_classname not in default_buttons:
+            label_count_dict[write_classname] = 1
 
     label_counts = map(list, label_count_dict.items())
     label_counts = sorted(label_counts, key=itemgetter(1))[::-1]
