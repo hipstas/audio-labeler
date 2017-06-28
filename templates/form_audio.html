@@ -99,6 +99,7 @@
 
             <br />
 
+              <h3>
                 <form method="post" action="{{ url_for('form') }}">
 
                     <input type="hidden" value="{{ audio_file_id }}" name="audio_file_id" />
@@ -115,16 +116,17 @@
                   <input type="submit" name="button" value="Music" />
                   <input type="submit" name="button" value="Silence" />
                   <input type="submit" name="button" value="Multiple Speakers" />
+                  <input type="submit" name="button" value="Noise" />
                   <input type="submit" name="button" value="Not Sure" />
 
-                  <p>
+                  <br />
                   {% for pair in label_counts %}
                       <input type="submit" name="button" value="{{ pair[0] }}" />
                   {% endfor %}
-                  </p>
 
 
                 </form>
+              </h3>
             </div>
         </div>
     </body>

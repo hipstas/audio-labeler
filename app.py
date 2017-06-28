@@ -70,7 +70,7 @@ def form():
     except:
         pass
 
-    default_buttons=["Background Speaker","Music","Silence","Multiple Speakers","Not Sure", "Noise"]
+    default_buttons=["","Background Speaker","Music","Silence","Multiple Speakers","Not Sure", "Noise"]
 
     try:
         if write_classname not in default_buttons:
