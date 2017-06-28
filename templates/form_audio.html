@@ -93,7 +93,7 @@
 
             <br />
 
-            <h4> {{ media_path }} </h4>
+            <h3> {{ media_path }} </h3>
 
             <h4>    {{ start_time }} seconds</h4>
 
@@ -106,8 +106,10 @@
 
                     <input type="hidden" value="{{ temp_wav_filename }}" name="temp_wav_filename" />
 
-                    <input type="submit" name="button" id="apply_button" value="Apply Label" /> &nbsp;
-                    <input type="text" size="63" value="{{ classname }}" name="classname" /><br />
+                    <input type="text" size="70" value="{{ classname }}" name="classname" />
+                    <input type="submit" name="button" id="apply_button" value="Apply Label" />
+
+                    <br /><br />
 
                   <input type="submit" name="button" value="Background Speaker" />
                   <input type="submit" name="button" value="Music" />
@@ -116,7 +118,7 @@
                   <input type="submit" name="button" value="Noise" />
                   <input type="submit" name="button" value="Not Sure" />
 
-                  <br />
+                  <br /><br />
                   {% for pair in label_counts %}
                       <input type="submit" name="button" value="{{ pair[0] }}" />
                   {% endfor %}
