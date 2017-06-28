@@ -39,7 +39,7 @@ app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 
-label_counts = {}
+label_count_dict = {'val':3,"val2":4}
 
 # Define a route for the default URL, which loads the form
 @app.route('/',methods=['POST','GET'])
@@ -48,7 +48,7 @@ def form():
     try:
         classname=request.form['classname']
 
-        label_counts[classname]=1
+        label_count_dict[classname]=1
 
         if request.form['button'] == 'Apply Label':
             write_classname = classname
@@ -70,6 +70,7 @@ def form():
     except:
         pass
 
+    label_counts=map(list, label_count_dict.items())
 
     ## Launching new round
     #audio_filename=random.choice([item for item in os.listdir('/home/audio_labeler/clips') if item[-4:].lower() in ('.mp3','.wav','.mp4')])
