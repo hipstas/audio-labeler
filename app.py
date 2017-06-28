@@ -10,6 +10,7 @@ import subprocess
 import glob
 import fnmatch
 from moviepy.audio.io import AudioFileClip
+from operator import itemgetter
 #from pydub import AudioSegment
 import timeit
 
@@ -39,7 +40,7 @@ app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 
-label_count_dict = {'val':3,"val2":4}
+label_count_dict = {}
 
 # Define a route for the default URL, which loads the form
 @app.route('/',methods=['POST','GET'])
@@ -48,7 +49,10 @@ def form():
     try:
         classname=request.form['classname']
 
-        label_count_dict[classname]=1
+        try:
+            label_count_dict[classname] += 1
+        except:
+            label_count_dict[classname] = 1
 
         if request.form['button'] == 'Apply Label':
             write_classname = classname
@@ -70,7 +74,8 @@ def form():
     except:
         pass
 
-    label_counts=map(list, label_count_dict.items())
+    label_counts = map(list, label_count_dict.items())
+    label_counts = sorted(label_counts, key=itemgetter(1))[::-1]
 
     ## Launching new round
     #audio_filename=random.choice([item for item in os.listdir('/home/audio_labeler/clips') if item[-4:].lower() in ('.mp3','.wav','.mp4')])
@@ -83,7 +88,7 @@ def form():
     snd.subclip(start_time,start_time+5).write_audiofile('/home/audio_labeler/static/'+temp_wav_filename)
     response = render_template('form_audio.html', audio_file_id=audio_file_id, \
                 start_time=start_time, classname=classname, temp_wav_filename=temp_wav_filename, \
-                media_path=media_path, label_counts=label_counts)
+                media_path=media_path, label_counts=label_counts[:5])
     return response
 
 
