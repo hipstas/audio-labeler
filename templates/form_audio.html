@@ -117,11 +117,11 @@
                   <input type="submit" name="button" value="Multiple Speakers" />
                   <input type="submit" name="button" value="Not Sure" />
 
-
+                  <p>
                   {% for pair in label_counts %}
-                      <p> {{ pair[0] }}</p>
+                      <input type="submit" name="button" value="{{ pair[0] }}" />
                   {% endfor %}
-
+                  </p>
 
 
                 </form>
