@@ -59,10 +59,10 @@ def form():
         start_time=request.form['start_time']
         with open('/home/audio_labeler/output_table.csv','a') as fo:
             label_duration = 1
-            fo.write(audio_file_id+',')
-            fo.write(str(float(start_time))+',')
-            fo.write(str(float(label_duration))+',')
-            fo.write('''"''' + write_classname + '''"\n''')
+            fo.write(audio_file_id+','+ \
+            str(float(start_time))+','+ \
+            str(float(label_duration))+','+ \
+            '''"''' + write_classname + '''"\n''')
     except:
         classname=''
 
