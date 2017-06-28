@@ -38,12 +38,18 @@ media_paths = [item for item in media_paths if item.lower()[-4:] in ('.mp3','.mp
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
+
+label_counts = {}
+
 # Define a route for the default URL, which loads the form
 @app.route('/',methods=['POST','GET'])
 def form():
     ## Dealing with form data from the last round, if applicable
     try:
         classname=request.form['classname']
+
+        label_counts[classname]=1
+
         if request.form['button'] == 'Apply Label':
             write_classname = classname
         else:
@@ -63,8 +69,6 @@ def form():
         os.remove('/home/audio_labeler/static/'+request.form['temp_wav_filename'])
     except:
         pass
-
-    label_counts=[['test',3],['test2',100],['test3',9]]
 
 
     ## Launching new round
