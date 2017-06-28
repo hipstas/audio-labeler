@@ -45,6 +45,9 @@ label_count_dict = {}
 # Define a route for the default URL, which loads the form
 @app.route('/',methods=['POST','GET'])
 def form():
+
+    write_classname=''
+
     ## Dealing with form data from the last round, if applicable
     try:
         classname=request.form['classname']
