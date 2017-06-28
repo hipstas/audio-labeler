@@ -118,6 +118,12 @@
                   <input type="submit" name="button" value="Not Sure" />
 
 
+                  {% for pair in label_counts %}
+                      <p> {{ pair[0] }}</p>
+                  {% endfor %}
+
+
+
                 </form>
             </div>
         </div>

@@ -64,6 +64,9 @@ def form():
     except:
         pass
 
+    label_counts=[['test',3],['test2',100],['test3',9]]
+
+
     ## Launching new round
     #audio_filename=random.choice([item for item in os.listdir('/home/audio_labeler/clips') if item[-4:].lower() in ('.mp3','.wav','.mp4')])
     media_path = random.choice(media_paths)
@@ -73,7 +76,9 @@ def form():
     snd = AudioFileClip.AudioFileClip(media_path)
     temp_wav_filename = str(random.random())[2:]+'.wav'
     snd.subclip(start_time,start_time+5).write_audiofile('/home/audio_labeler/static/'+temp_wav_filename)
-    response = render_template('form_audio.html', audio_file_id=audio_file_id, start_time=start_time, classname=classname, temp_wav_filename=temp_wav_filename, media_path=media_path)
+    response = render_template('form_audio.html', audio_file_id=audio_file_id, \
+                start_time=start_time, classname=classname, temp_wav_filename=temp_wav_filename, \
+                media_path=media_path, label_counts=label_counts)
     return response
 
 
