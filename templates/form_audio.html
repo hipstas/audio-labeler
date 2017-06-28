@@ -108,10 +108,10 @@
 
                     <input type="hidden" value="{{ temp_wav_filename }}" name="temp_wav_filename" />
 
-                    <label for="classname">Label:</label>
-                    <input type="text" size="72" value="{{ classname }}" name="classname" /><br /><br />
+                    <input type="submit" name="button" id="apply_button" value="Apply Label" /> &nbsp;
+                    <input type="text" size="66" value="{{ classname }}" name="classname" /><br /><br />
 
-                  <input type="submit" name="button" id="apply_button" value="Apply Label" /><br /><br />
+
                   <input type="submit" name="button" value="Background Speaker" />
                   <input type="submit" name="button" value="Music" />
                   <input type="submit" name="button" value="Silence" />
@@ -119,7 +119,7 @@
                   <input type="submit" name="button" value="Noise" />
                   <input type="submit" name="button" value="Not Sure" />
 
-                  <br />
+                  <br /><br />
                   {% for pair in label_counts %}
                       <input type="submit" name="button" value="{{ pair[0] }}" />
                   {% endfor %}
