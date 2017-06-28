@@ -93,11 +93,9 @@
 
             <br />
 
-            <h3> {{ media_path }} </h3>
+            <h2> {{ media_path }} </h2>
 
-            <h3>    {{ start_time }} seconds</h3>
-
-            <br />
+            <h2>    {{ start_time }} seconds</h2>
 
               <h3>
                 <form method="post" action="{{ url_for('form') }}">
@@ -108,10 +106,10 @@
 
                     <input type="hidden" value="{{ temp_wav_filename }}" name="temp_wav_filename" />
 
-                    <label for="classname">Label:</label>
+                    <input type="submit" name="button" id="apply_button" value="Apply Label" /> &nbsp;  
                     <input type="text" size="72" value="{{ classname }}" name="classname" /><br />
 
-                  <input type="submit" name="button" id="apply_button" value="Apply Label" /><br /><br />
+
                   <input type="submit" name="button" value="Background Speaker" />
                   <input type="submit" name="button" value="Music" />
                   <input type="submit" name="button" value="Silence" />
