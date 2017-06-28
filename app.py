@@ -46,8 +46,6 @@ label_count_dict = {}
 @app.route('/',methods=['POST','GET'])
 def form():
 
-    write_classname=''
-
     ## Dealing with form data from the last round, if applicable
     try:
         classname=request.form['classname']
@@ -79,8 +77,10 @@ def form():
         if write_classname not in default_buttons:
             label_count_dict[write_classname] += 1
     except:
-        if write_classname not in default_buttons:
-            label_count_dict[write_classname] = 1
+        try:
+            if write_classname not in default_buttons:
+                label_count_dict[write_classname] = 1
+        except: pass
 
     label_counts = map(list, label_count_dict.items())
     label_counts = sorted(label_counts, key=itemgetter(1))[::-1]
