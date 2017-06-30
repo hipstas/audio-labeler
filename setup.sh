@@ -6,6 +6,7 @@ wget -N https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/
 mkdir -p media
 mkdir -p templates
 mkdir -p static/wavesurfer
+mkdir -p static/output
 
 cd static
 wget -N https://raw.githubusercontent.com/stevemclaugh/audio-labeling-container/master/static/style.css

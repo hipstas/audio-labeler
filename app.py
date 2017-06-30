@@ -9,6 +9,7 @@ import thread
 import subprocess
 import glob
 import fnmatch
+import shutil
 from moviepy.audio.io import AudioFileClip
 from operator import itemgetter
 #from pydub import AudioSegment
@@ -57,12 +58,14 @@ def form():
             write_classname = request.form['button']
         audio_file_id=request.form['audio_file_id']
         start_time=request.form['start_time']
-        with open('/home/audio_labeler/output_table.csv','a') as fo:
+        output_csv_path='/home/audio_labeler/output_table.csv'
+        with open(output_csv_path,'a') as fo:
             label_duration = 1
             fo.write(audio_file_id+','+ \
             str(float(start_time))+','+ \
             str(float(label_duration))+','+ \
             '''"''' + write_classname + '''"\n''')
+        shutil.copy(output_csv_path,'/home/audio_labeler/static/output/output_table.csv')
     except:
         classname=''
 
