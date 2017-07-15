@@ -1,9 +1,9 @@
-# Audio Labeler
-
 ![](img/Audio_Labeler.png)
 
-First, install [Docker CE](https://www.docker.com/community-edition) and/or [Docker Toolbox](https://www.docker.com/products/docker-toolbox).
 
+### Running Audio Labeler
+
+First, install [Docker CE](https://www.docker.com/community-edition) and/or [Docker Toolbox](https://www.docker.com/products/docker-toolbox).
 
 Open a new terminal window and enter the following commands to kill the current Docker container (if running), then download and launch the latest container build.
 
