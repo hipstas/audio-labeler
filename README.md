@@ -1,7 +1,7 @@
 ![](img/Audio_Labeler.png)
 
 
-## *Using Audio Labeler*
+### *Running Audio Labeler*
 
 First, install [Docker CE](https://www.docker.com/community-edition) or [Docker Toolbox](https://www.docker.com/products/docker-toolbox).
 
