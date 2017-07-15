@@ -2,3 +2,4 @@ media/*
 clips/*
 test/*
 .DS_Store
+.idea*

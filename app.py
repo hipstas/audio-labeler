@@ -1,7 +1,8 @@
-# We need to import request to access the details of the POST request
-# and render_template, to render our templates (form and response)
-# we'll use url_for to get some URLs for the app on the templates
+# We need to import `request` to access the details of the POST request
+# and `render_template`, to render our templates (form and response).
+# We'll use `url_for` to get some URLs for the app in the templates.
 from flask import Flask, render_template, request, url_for
+
 import unicodecsv
 import random
 import os
@@ -17,7 +18,6 @@ import timeit
 
 os.chdir('/home/audio_labeler/')
 
-
 ## Returns duration of any media file using ffprobe
 def media_duration(media_path):
     return float(subprocess.check_output(['ffprobe', '-v', 'quiet', '-of', 'csv=p=0', '-show_entries', 'format=duration', media_path]).strip())
@@ -25,9 +25,7 @@ def media_duration(media_path):
 ## Creating a list of file IDs in the "clips" directory
 #complete_clip_ids = list(set([item.split('____')[0] for item in os.listdir('clips') if '____' in item]))
 
-
 ## Creating a list of every media file in the "media" directory
-
 media_paths=[]
 
 for root, dirnames, filenames in os.walk('/home/audio_labeler/media'):
@@ -39,7 +37,6 @@ media_paths = [item for item in media_paths if item.lower()[-4:] in ('.mp3','.mp
 # Initialize the Flask application
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-
 
 label_count_dict = {}
 
@@ -61,20 +58,20 @@ def form():
         output_csv_path='/home/audio_labeler/output_table.csv'
         with open(output_csv_path,'a') as fo:
             label_duration = 1
-            fo.write(audio_file_id+','+ \
-            str(float(start_time))+','+ \
-            str(float(label_duration))+','+ \
+            fo.write(audio_file_id + ',' + \
+            str(float(start_time)) + ',' + \
+            str(float(label_duration)) + ',' + \
             '''"''' + write_classname + '''"\n''')
         shutil.copy(output_csv_path,'/home/audio_labeler/static/output/output_table.csv')
     except:
         classname=''
 
     try:
-        os.remove('/home/audio_labeler/static/'+request.form['temp_wav_filename'])
+        os.remove('/home/audio_labeler/static/' + request.form['temp_wav_filename'])
     except:
         pass
 
-    default_buttons=["","Background Speaker","Music","Silence","Multiple Speakers","Not Sure", "Noise"]
+    default_buttons=["Background Speaker","Music","Silence","Multiple Speakers","Not Sure", "Noise",""]
 
     try:
         if write_classname not in default_buttons:
@@ -95,8 +92,8 @@ def form():
     duration = media_duration(media_path)
     start_time = int((random.random()*(duration-5.0)))
     snd = AudioFileClip.AudioFileClip(media_path)
-    temp_wav_filename = str(random.random())[2:]+'.wav'
-    snd.subclip(start_time,start_time+5).write_audiofile('/home/audio_labeler/static/'+temp_wav_filename)
+    temp_wav_filename = str(random.random())[2:] + '.wav'
+    snd.subclip(start_time,start_time + 5).write_audiofile('/home/audio_labeler/static/' + temp_wav_filename)
     response = render_template('form_audio.html', audio_file_id=audio_file_id, \
                 start_time=start_time, classname=classname, temp_wav_filename=temp_wav_filename, \
                 media_path=media_path, label_counts=label_counts[:5])
