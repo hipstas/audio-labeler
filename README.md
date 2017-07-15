@@ -28,7 +28,7 @@ docker run -it -d --name audio_labeler -p 8000:8000 -v ~/Desktop/audio_labeler:/
 
 Point your browser to `localhost:8000` and begin labeling. Audio Labeler is currently configured to label 1-second clips chosen at random from a provided audio collection. (At the moment I'm  not weighting my selection based on each file's duration.)
 
-The 1-second clip we're labeling will play each time the page loads, and is shaded in the waveform display. The following 4 seconds are provided for context if needed.
+The 1-second clip we're labeling will autoplay each time the page loads, and is shaded in the waveform display. The following 4 seconds are provided for context if needed.
 
 Enter your label by hand and click `Apply Label`, or choose from the included options. For convenience, a label in the text box will persist from one page to the next. The `Apply Label` button is highlighted on page load, so you can quickly apply the contents of the text box by pressing return.
 
