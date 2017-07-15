@@ -1,6 +1,5 @@
 ![](img/Audio_Labeler.png)
 
-
 ### *Running Audio Labeler*
 
 First, install [Docker CE](https://www.docker.com/community-edition) or [Docker Toolbox](https://www.docker.com/products/docker-toolbox).
@@ -34,6 +33,8 @@ Enter your label by hand and click `Apply Label`, or choose from the included op
 
 The top 5 most used labels in the current session will appear as dedicated buttons at the bottom of the page, ordered by how often they have been used.
 
-The application will output all label data to the file `output_table.csv` in the `audio_labeler` directory. You can download the current CSV at any time using the link provided in the web interface.
+The application will output all label data to the file `output_table.csv` in the `audio_labeler` directory. You can download the current CSV at any time using the link provided in the browser interface.
 
-Each label is written as a new row to the end of `output_table.csv`, so you can safely edit the CSV while you work and resume where you left off when you relaunch the Docker container. If you delete the output file or change its name, a new one will be created next time you apply a label.
+Each label is written as a new row to the end of `output_table.csv`, so you can safely edit the CSV while you work and resume where you left off when you relaunch the Docker container.
+
+If you delete `output_table.csv` or change its name, a new one will be created next time you apply a label through the browser interface. I recommend [LibreOffice](https://www.libreoffice.org/) for editing CSVs without mangling them.
