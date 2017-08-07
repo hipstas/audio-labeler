@@ -23,6 +23,7 @@ python-numpy-dev \
 python-numpy \
 python-yaml \
 python-pygame \
+gunicorn \
 && python -m pip install -U pip \
 && pip install -U \
 setuptools \
