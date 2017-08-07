@@ -41,6 +41,7 @@ RUN add-apt-repository -y ppa:mc3man/trusty-media \
  && apt-get install -y ffmpeg gstreamer0.10-ffmpeg
 
 COPY ./wsgi.py /home/audio_labeler/
+COPY ./wsgi.py /home/
 
 WORKDIR /home/audio_labeler/
 ENTRYPOINT ["bash","/home/setup.sh"]
