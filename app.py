@@ -96,7 +96,7 @@ def form():
     snd.subclip(start_time,start_time + 5).write_audiofile('/home/audio_labeler/static/' + temp_wav_filename)
     response = render_template('form_audio.html', audio_file_id=audio_file_id, \
                 start_time=start_time, classname=classname, temp_wav_filename=temp_wav_filename, \
-                media_path=media_path, label_counts=label_counts[:5])
+                media_path=media_path, label_counts=label_counts[:15])
     return response
 
 
